@@ -16,7 +16,8 @@ export const actions = ($this, actions) => {
   }
   const buttons = Crud.get('buttons')
   if (typeof actions === 'function') {
-    return actions($this, buttons($this))
+     return actions($this, buttons($this))
   }
-  return buttons($this)
+  const fnButtons = buttons.get('buttons')
+  return fnButtons($this)
 }

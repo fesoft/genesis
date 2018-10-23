@@ -1,19 +1,23 @@
 <!--suppress RequiredAttributes -->
 <template>
   <div class="app-crud-grid" :class="classNames">
-
-    <slot name="header"/>
-
-    <slot v-if="top" name="top">
+     <slot name="header"/>
+     
+      <slot v-if="top" name="top">
       <app-grid-toolbar
               v-bind="{handler, direction, page, pages, limit, total, paginate, buttons: buttons.top, toolbar: toolbar.pagination.top}"
-              @change-page="changePage" @change-limit="changeLimit" :class='toolbar.pagination.top.className'/>
+              @change-page="changePage" 
+              @change-limit="changeLimit" 
+              :class='toolbar.pagination.top.className'/>
     </slot>
     <hr v-if="top">
 
     <slot name="content">
-      <component :is="content" ref="grid"
-                      v-bind="{columns, data, debug, position, slots, styles, bodyStyle, actions: buttons.middle}"/>
+      <component 
+        :is="content" 
+        ref="grid"
+        v-bind="{columns, data, debug, position, slots, styles, bodyStyle, actions: buttons.middle}"
+      />
     </slot>
 
     <hr v-if="bottom">
@@ -21,7 +25,9 @@
     <slot v-if="bottom" name="bottom">
       <app-grid-toolbar
               v-bind="{handler, direction, page, pages, limit, total, paginate, buttons: buttons.bottom, toolbar: toolbar.pagination.bottom}"
-              @change-page="changePage" @change-limit="changeLimit" :class='toolbar.pagination.bottom.className'/>
+              @change-page="changePage" 
+              @change-limit="changeLimit" 
+              :class='toolbar.pagination.bottom.className'/>
     </slot>
 
     <slot name="footer"/>
@@ -31,9 +37,18 @@
     </slot>
 
     <slot v-if="filtering" name="filter"></slot>
-    <q-modal ref="filter" position="right" :content-css="filter.css">
-      <app-grid-filter v-if="search" :filters="filter.columns" :record="filter.record"
-                       @close="filterClose" @apply="filterApply" @clear="filterClear"/>
+    <q-modal 
+      ref="filter" 
+      position="right" 
+      :content-css="filter.css">
+      <app-grid-filter 
+        v-if="search" 
+        :filters="filter.columns" 
+        :record="filter.record"
+        @close="filterClose" 
+        @apply="filterApply" 
+        @clear="filterClear"
+      />
     </q-modal>
 
     <template v-if="debugging">
@@ -49,6 +64,7 @@
   import AppButtonBar from 'genesis/components/button/AppButtonBar.vue'
   import AppGridFilter from 'genesis/components/crud/components/grid/AppGridFilter'
   import AppGridToolbar from 'genesis/components/crud/components/grid/AppGridToolbar.vue'
+  import AppDebugger from 'genesis/components/debugger/AppDebugger.vue'
   import MixinNavigation from 'genesis/components/@mixins/MixinNavigation'
   import { MixinComputed, MixinData, MixinMethods, MixinProps } from './model'
   import { MixinGrid, MixinFilter } from './model/grid'
@@ -65,7 +81,11 @@
     ],
     name: 'app-crud-grid',
     components: {
-      AppDataTable, AppButtonBar, AppGridToolbar, AppGridFilter
+      AppDataTable, 
+      AppButtonBar, 
+      AppGridToolbar, 
+      AppGridFilter,
+      AppDebugger
     }
   }
   export default AppCrudGrid

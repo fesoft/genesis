@@ -19,7 +19,6 @@
 </template>
 
 <script type="text/javascript">
-  import { Events } from 'quasar-framework'
   import { PATH_HOME } from 'genesis/support/index'
 
   export default {
@@ -91,13 +90,13 @@
       }
     },
     created () {
-      Events.$on('app.route.update', this.updateBreadcrumb)
+      this.$on('app.route.update', this.updateBreadcrumb)
     },
     mounted () {
       this.updateBreadcrumb()
     },
     destroyed () {
-      Events.$off('app.route.update')
+      this.$off('app.route.update')
     }
   }
 </script>

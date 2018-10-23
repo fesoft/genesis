@@ -1,4 +1,3 @@
-import { Events } from 'quasar-framework'
 import { Auth, View } from 'genesis'
 import store from 'genesis/infra/store'
 import { abort } from 'genesis/infra/services/http'
@@ -122,7 +121,7 @@ export const beforeEach = (to, from, next) => {
  * @returns {*}
  */
 const toNext = (to, next, path = '') => {
-  Events.$emit('app.route.before', to, path)
+  this.$emit('app.route.before', to, path)
   if (path) {
     return next(path)
   }

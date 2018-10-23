@@ -10,8 +10,6 @@ export default storage({
     if (!component) {
       return
     }
-    return () => System.import(`src/${component}.vue`)
-  },
-  beforeEach: beforeEach,
-  afterEach: beforeEach
+    return () => import(`src/${component}.vue`)
+  }
 })

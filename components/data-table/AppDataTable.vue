@@ -1,6 +1,11 @@
 <template>
   <div class="app-data-table" :style="config.styles">
-    <q-data-table v-bind="{data, columns, config}" @refresh="refresh" @rowclick="rowclick">
+     <q-table 
+        row-key="id"
+        v-bind="{data, columns, config}" 
+        @refresh="refresh" 
+        @rowclick="rowclick"
+      >
 
       <div v-if="actions.length" slot="col-options" slot-scope="cell">
         <div class="app-data-table-options">
@@ -12,12 +17,12 @@
           </q-fab>
         </div>
       </div>
-
+      
       <template v-for="slot in slots" :slot="'col-' + slot.field" slot-scope="cell">
         <field-functional :component="slot.component" :on="on(slot, cell)" :props="props(slot, cell)"/>
       </template>
-    </q-data-table>
-  </div>
+    </q-table>
+    </div>
 </template>
 
 <script type="text/javascript">

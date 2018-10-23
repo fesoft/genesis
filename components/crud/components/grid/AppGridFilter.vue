@@ -2,7 +2,14 @@
   <div class="app-grid-filter">
     <div class="text-right">
       <span>
-        <q-icon class="cursor-pointer app-grid-filter-closer" name="cancel" @click="$emit('close')"></q-icon>
+        <q-btn
+          round
+          flat
+          color="red"
+          icon="cancel"
+          @click="$emit('close')"
+         >
+        </q-btn>
         <app-tooltip>Fechar o painel de filtros</app-tooltip>
       </span>
     </div>
@@ -23,7 +30,7 @@
           <app-tooltip>Aplica a pesquisa a lista</app-tooltip>
         </span>
         <span>
-          <q-btn color="white" @click="$emit('clear')">Limpar</q-btn>
+          <q-btn color="primary" @click="$emit('clear')">Limpar</q-btn>
           <app-tooltip>Limpa os dados da pesquisa</app-tooltip>
         </span>
       </div>

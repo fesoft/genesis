@@ -32,12 +32,12 @@ export default {
     /**
      */
     filterOpen () {
-      this.$refs.filter.open()
+       this.$refs.filter.show()
     },
     /**
      */
     filterClose () {
-      window.setTimeout(this.$refs.filter.close, 100)
+      window.setTimeout(this.$refs.filter.hide, 100)
     },
     /**
      */
@@ -60,15 +60,14 @@ export default {
         query[key] = value
       })
       query['page'] = 1
-
-      this.browse(this.path, query)
+      this.$g.browse(this.path, query)
     },
     /**
      */
     filterClear () {
       const query = this.$route.query
       Object.keys(this.filter.record).forEach(key => delete query[key])
-      this.browse(this.path, query)
+      this.$g.browse(this.path, query)
     },
     /**
      * @param {object} schema

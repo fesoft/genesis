@@ -1,4 +1,4 @@
-import { Dialog, Loading, Toast } from 'quasar-framework'
+import { Dialog, Loading, Notify } from 'quasar-framework'
 
 /**
  * @param {String} title
@@ -68,9 +68,9 @@ export const loading = (status = true, delay = 0, message = '') => {
  * @param {String} color
  * @param {String} bgColor
  */
-export const toast = (html, icon = 'done', timeout = 6000, color = '#ffffff', bgColor = 'rgba(50, 50, 50, 0.95)') => {
-  Toast.create({
-    html, icon, timeout, color, bgColor
+export const toast = (message, icon = 'done', timeout = 6000, color = '#ffffff', bgColor = 'rgba(50, 50, 50, 0.95)') => {
+  Notify.create({
+    message, icon, timeout, color, bgColor
   })
 }
 
@@ -118,9 +118,9 @@ export const toastWarning = (html) => {
  * @param {String} color
  * @param {String} bgColor
  */
-export const toastWithButton = (html, button, icon = 'warning', timeout = 6000, color = '#ffffff', bgColor = '#515151') => {
-  Toast.create({
-    html, button, icon, timeout, color, bgColor
+export const toastWithButton = (message, button, icon = 'warning', timeout = 6000, color = '#ffffff', bgColor = '#515151') => {
+  Notify.create({
+    message, button, icon, timeout, color, bgColor
   })
 }
 

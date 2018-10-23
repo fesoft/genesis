@@ -1,15 +1,17 @@
 <template>
-  <q-btn :icon="inherit" v-bind="{color, round, outline, flat, small}" :class="{'raised': raised, 'rotate': rotate}"
-         @click="$emit('click')">
-    <span v-if="label" v-html="label"></span>
-    <q-icon v-else :name="icon"></q-icon>
-    <slot></slot>
+  <q-btn 
+    :icon="icon" 
+    :label="label"
+    v-bind="{color, round, outline, flat, small}" 
+    :class="{'raised': raised, 'rotate': rotate}"
+    @click="$emit('click')"
+  >
   </q-btn>
 </template>
 
 <script type="text/javascript">
   export default {
-    name: 'q-button',
+    name: 'app-button',
     computed: {
       inherit () {
         return this.label ? this.icon : ''

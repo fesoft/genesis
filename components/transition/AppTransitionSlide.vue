@@ -7,7 +7,7 @@
 </template>
 
 <script type="text/javascript">
-  import { Events, uid } from 'quasar-framework'
+  import { uid } from 'quasar-framework'
 
   export default {
     name: 'app-transition-slide',
@@ -52,14 +52,14 @@
       }
     },
     created () {
-      Events.$on('app.route.update', this.updateTransition)
-      Events.$on('app.route.before', (to, path) => {
+      this.$on('app.route.update', this.updateTransition)
+      this.$on('app.route.before', (to, path) => {
         this.$refs.wrapper.scrollTop = 0
       })
     },
     destroyed () {
-      Events.$off('app.route.update')
-      Events.$off('app.route.before')
+      this.$off('app.route.update')
+      this.$off('app.route.before')
     }
   }
 </script>

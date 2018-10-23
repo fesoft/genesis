@@ -21,10 +21,10 @@
     name: 'app-card',
     props: {
       label: {
-        default: ''
+        default: 'teste'
       },
       icon: {
-        default: ''
+        default: 'home'
       },
       separator: {
         default: true

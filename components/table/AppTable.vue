@@ -1,5 +1,5 @@
 <template>
-  <div class="q-data-table">
+  <div class="q-table">
     <table class="q-table horizontal-delimiter">
       <thead>
       <tr>

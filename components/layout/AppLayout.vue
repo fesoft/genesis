@@ -1,30 +1,42 @@
 <template>
-  <q-layout ref="layout" v-model="sides" v-bind="{view, leftBreakpoint, reveal}" :class="classNames">
+  <q-layout
+    ref="layout"
+    v-model="sides"
+    v-bind="{view, leftBreakpoint, reveal}" :class="classNames">
 
-    <q-toolbar slot="header" v-bind="toolbar">
-      <slot name="header">
+    <q-layout-header>
+      <q-toolbar
+        v-bind="toolbar"
+      >
+      <q-btn
+        flat
+        @click="leftDrawer = !leftDrawer"
+        icon="menu"
+      >
+      </q-btn>
 
-        <slot name="header-toggle">
-          <q-btn flat @click="toggleLeft">
-            <q-icon name="menu"></q-icon>
-          </q-btn>
-        </slot>
+       <q-toolbar-title>
+        {{ AppName }}
+        <div slot="subtitle" class="hidden-medium">
+          {{ AppTooltip }} <span v-if="dev">{{ $q.version }}</span>
+        </div>
+      </q-toolbar-title>
 
-        <slot name="header-title">
-          <q-toolbar-title>
-            {{ AppName }}
-            <div slot="subtitle" class="hidden-medium">
-              {{ AppTooltip }} <span v-if="dev">{{ $q.version }}</span>
-            </div>
-          </q-toolbar-title>
-        </slot>
+      <slot name="header-content"></slot>
 
-        <slot name="header-content"></slot>
-
-        <q-btn flat @click="" v-if="getDashboardOptions === !undefined">
-          <q-icon name="more_vert"></q-icon>
-          <q-popover ref="popover" class="q-popover-menu">
-            <q-list item-separator highlight link>
+        <q-btn
+          flat
+          @click=""
+          v-if="getDashboardOptions === !undefined"
+          icon="more_vert"
+          <q-popover
+          ref="popover"
+          class="q-popover-menu">
+            <q-list
+              item-separator
+              highlight
+              link
+            >
               <!--suppress CommaExpressionJS -->
               <q-item v-for="(menu, index) in getDashboardOptions" :key="index" @click="handlerMenu(menu)" separator>
                 <q-item-side :color="menu.color" :icon="menu.icon"></q-item-side>
@@ -33,20 +45,15 @@
             </q-list>
           </q-popover>
         </q-btn>
-      </slot>
     </q-toolbar>
+    </q-layout-header>
 
-    <q-scroll-area v-if="left" slot="left" class="q-scroll-area">
-      <slot name="drawer-left-top">
-        <div class="q-drawer-logo">
-          <!--suppress HtmlUnknownTarget -->
-          <img src="statics/logo/big.png" alt="logo">
-        </div>
-      </slot>
-      <slot name="drawer-left">
-        <app-drawer-menu :menus="AppMenu" :shadow="shadow"></app-drawer-menu>
-      </slot>
-    </q-scroll-area>
+    <q-layout-drawer
+      v-model="leftDrawer"
+      :content-class="$q.theme === 'mat' ? 'bg-grey-2' : null"
+    >
+      <app-drawer-menu :menus="AppMenu" :shadow="shadow"></app-drawer-menu>
+    </q-layout-drawer>
 
     <slot name="breadcrumb">
       <div class="breadcrumb-wrapper">
@@ -71,7 +78,9 @@
 
   export default {
     components: {
-      AppBreadcrumb, AppDrawerMenu, AppTransitionSlide
+      AppBreadcrumb, 
+      AppDrawerMenu, 
+      AppTransitionSlide
     },
     name: 'app-layout',
     props: {
@@ -125,12 +134,15 @@
         default: () => true
       }
     },
-    data: () => ({
-      sides: {
-        left: true,
-        right: true
-      }
-    }),
+    data () {
+     return {
+       sides: {
+          left: true,
+          right: true
+        },
+        leftDrawer: true        
+     }
+    },
     computed: {
       environment () {
         return process.env.NODE_ENV
@@ -154,7 +166,7 @@
       },
       toggleLeft () {
         if (this.left) {
-          this.$refs.layout.toggleLeft()
+          this.toggleLeft()
         }
       }
     },
@@ -176,35 +188,4 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scope>
-  @import '~app/themes/quasar.variables'
-
-  .layout-default
-    .layout-aside
-      background-color $app-layout-drawer
-    .q-scroll-area
-      swidth 100%
-      height 100%
-    .q-drawer-logo
-      background $app-layout-drawer-logo
-      text-align center
-      padding 20px
-      border-bottom $app-layout-drawer-logo-border-bottom
-      img
-        max-height 100px
-    .breadcrumb-wrapper
-      position absolute
-      padding 0 17px 0 17px
-      box-shadow 0 0 4px 2px rgba(0, 0, 0, 0.3)
-      background $app-layout-breadcrumb-wrapper
-      width 100%
-      height 45px
-      z-index 2
-    .transition-wrapper
-      position relative
-      margin 45px 0 0 0
-
-  @media screen and (max-width 768px)
-    .layout-default
-      .breadcrumb-wrapper
-        padding 0 7px 0 7px
 </style>

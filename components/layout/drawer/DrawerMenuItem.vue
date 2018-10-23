@@ -14,15 +14,19 @@
 
     <app-collapsible v-else-if="isCollapsible" ref="collapse" v-bind="collapsible">
       <template v-for="child in menu.children">
-        <app-drawer-menu-item :menu="child" :badges="badges" :shadow="shadow"/>
+        <app-drawer-menu-item 
+          :menu="child" 
+          :badges="badges" 
+          :shadow="shadow"
+        />
       </template>
     </app-collapsible>
 
-    <q-side-link v-else :to="menu.to" :exact="menu.exact" item>
+    <q-item v-else :to="menu.to" :exact="menu.exact" item>
       <q-item-side v-if="menu.left" v-bind="menu.left"/>
       <q-item-main :label="menu.label" :sublabel="menu.sublabel"/>
       <q-item-side v-if="menu.right" v-bind="menu.right" right/>
-    </q-side-link>
+    </q-item>
 
     <q-chip v-if="badges[menu.id]" v-bind="badge">{{ badges[menu.id] }}</q-chip>
 
