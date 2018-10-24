@@ -3,13 +3,25 @@
     <div slot="component">
       <div v-show="editable" class="component" :class="{'has-error': problems.length}">
         <i class="material-icons" :class="{'disabled': disabled}" @click="openWidget">&#xE878;</i>
-        <q-datetime ref="widget" v-model="widget"
-                    v-bind="{type, monthNames, dayNames, format24h, okLabel, cancelLabel, clearLabel}"></q-datetime>
-        <input ref="input" class="input full-width" autocomplete="off"
-               v-mask="pattern"
-               v-model="model" v-bind="{id, name, placeholder, maxlength, disabled}"
-               @keypress="keypress" @keyup="keyup" @blur="blur" @focus="focus" @keydown.enter.stop.prevent="enter"
-               @input="updateValue($event.target.value)"/>
+        <q-datetime
+          ref="widget"
+          no-parent-field
+          v-model="widget"
+          v-bind="{type, monthNames, dayNames, format24h, okLabel, cancelLabel, clearLabel}"
+        >
+      </q-datetime>
+        <input
+          ref="input"
+          class="input full-width" autocomplete="off"
+          v-mask="pattern"
+          v-model="model"
+          v-bind="{id, name, placeholder, maxlength, disabled}"
+          @keypress="keypress"
+          @keyup="keyup"
+          @blur="blur"
+          @focus="focus"
+          @keydown.enter.stop.prevent="enter"
+          @input="updateValue($event.target.value)"/>
         <div class="input-bar"></div>
       </div>
 

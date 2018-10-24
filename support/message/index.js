@@ -1,4 +1,4 @@
-import { Dialog, Loading, Notify } from 'quasar-framework'
+import { Dialog, Loading, Notify } from 'quasar'
 
 /**
  * @param {String} title
@@ -24,26 +24,14 @@ export const alert = (title, message, actions) => {
  * @param {Function} cancel
  */
 export const confirm = (title, message, ok, cancel = null) => {
-  const buttons = [
-    {
-      label: 'Cancelar',
-      handler () {
-        if (cancel) {
-          cancel()
-        }
-      }
-    },
-    {
-      label: 'Ok',
-      handler: ok
-    }
-  ]
-
   Dialog.create({
     title: title,
     message: message,
-    buttons: buttons
+    ok: 'Sim',
+    cancel: 'Não'
   })
+  .then(ok)
+  .catch(cancel)
 }
 
 /**
@@ -60,7 +48,6 @@ export const loading = (status = true, delay = 0, message = '') => {
   }
   return Loading.hide()
 }
-
 /**
  * @param {String} html
  * @param {String} icon
@@ -68,9 +55,9 @@ export const loading = (status = true, delay = 0, message = '') => {
  * @param {String} color
  * @param {String} bgColor
  */
-export const toast = (message, icon = 'done', timeout = 6000, color = '#ffffff', bgColor = 'rgba(50, 50, 50, 0.95)') => {
+export const toast = (message, icon = 'done', timeout = 6000, color = 'secundary', type = 'positive') => {
   Notify.create({
-    message, icon, timeout, color, bgColor
+    message, icon, timeout, color, type
   })
 }
 

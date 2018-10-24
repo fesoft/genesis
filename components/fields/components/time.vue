@@ -1,10 +1,23 @@
 <template>
   <field :class="classNames" v-bind="{id, inline, problems, label, validate, title, tooltip, editable, visible}">
     <div slot="component">
-      <div v-show="editable" :class="{'component': true, 'has-error': problems.length}">
-        <i class="material-icons" @click="openWidget">access_time</i>
-        <q-datetime ref="widget" v-model="widget" type="time" ok-label="Ok" cancel-label="Cancelar"
-                    clear-label="Limpar"></q-datetime>
+      <div v-show="editable"
+        :class="{'component': true,'has-error': problems.length}"
+      >
+        <i
+          class="material-icons"
+          @click="openWidget"
+        >
+          access_time
+        </i>
+        <q-datetime ref="widget"
+          v-model="widget"
+          type="time"
+          ok-label="Ok"
+          cancel-label="Cancelar"
+          clear-label="Limpar"
+        >
+        </q-datetime>
         <input ref="input" class="input full-width" autocomplete="off"
                v-mask="pattern"
                v-model="model" v-bind="{id, name, placeholder, maxlength, disabled}"

@@ -39,7 +39,7 @@ export default {
      * @param {Function} callback
      */
     delete (id = '', callback = null) {
-      this.service
+        this.service
         .delete(id)
         .then(response => this.then(response, 'delete', callback))
         .catch(error => this.catch(error, 'delete', [id]))

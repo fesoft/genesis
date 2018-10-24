@@ -78,15 +78,15 @@
 
   export default {
     components: {
-      AppBreadcrumb, 
-      AppDrawerMenu, 
+      AppBreadcrumb,
+      AppDrawerMenu,
       AppTransitionSlide
     },
     name: 'app-layout',
     props: {
       view: {
         type: String,
-        default: 'lHh Lpr lFf' // default: 'lHh Lpr fff'
+        default: 'lHh Lpr lfr ' // default: 'lHh Lpr fff'
       },
       reveal: {
         type: Boolean,
@@ -140,7 +140,7 @@
           left: true,
           right: true
         },
-        leftDrawer: true        
+        leftDrawer: true
      }
     },
     computed: {

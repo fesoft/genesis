@@ -14,7 +14,9 @@ export default {
         pagination: undefined,
         messages: this.messages,
         labels: this.labels
-      }
+      },
+      selection: 'single',
+      selected: []      
     }
   }
 }

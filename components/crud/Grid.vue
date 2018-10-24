@@ -1,22 +1,32 @@
 <!--suppress RequiredAttributes -->
 <template>
   <div class="app-crud-grid" :class="classNames">
+
      <slot name="header"/>
-     
       <slot v-if="top" name="top">
+
       <app-grid-toolbar
-              v-bind="{handler, direction, page, pages, limit, total, paginate, buttons: buttons.top, toolbar: toolbar.pagination.top}"
-              @change-page="changePage" 
-              @change-limit="changeLimit" 
-              :class='toolbar.pagination.top.className'/>
+          v-bind="{handler, direction, page, pages, limit, total, paginate, buttons: buttons.top, toolbar: toolbar.pagination.top}"
+          @change-page="changePage"
+          @change-limit="changeLimit"
+          :class='toolbar.pagination.top.className'/>
     </slot>
     <hr v-if="top">
 
     <slot name="content">
-      <component 
-        :is="content" 
+      <AppDataTable
+        :is="content"
         ref="grid"
-        v-bind="{columns, data, debug, position, slots, styles, bodyStyle, actions: buttons.middle}"
+        v-bind="{
+          columns,
+          data,
+          debug,
+          position,
+          slots,
+          styles,
+          bodyStyle,
+          actions: buttons.middle
+        }"
       />
     </slot>
 
@@ -25,8 +35,8 @@
     <slot v-if="bottom" name="bottom">
       <app-grid-toolbar
               v-bind="{handler, direction, page, pages, limit, total, paginate, buttons: buttons.bottom, toolbar: toolbar.pagination.bottom}"
-              @change-page="changePage" 
-              @change-limit="changeLimit" 
+              @change-page="changePage"
+              @change-limit="changeLimit"
               :class='toolbar.pagination.bottom.className'/>
     </slot>
 
@@ -37,16 +47,16 @@
     </slot>
 
     <slot v-if="filtering" name="filter"></slot>
-    <q-modal 
-      ref="filter" 
-      position="right" 
+    <q-modal
+      ref="filter"
+      position="right"
       :content-css="filter.css">
-      <app-grid-filter 
-        v-if="search" 
-        :filters="filter.columns" 
+      <app-grid-filter
+        v-if="search"
+        :filters="filter.columns"
         :record="filter.record"
-        @close="filterClose" 
-        @apply="filterApply" 
+        @close="filterClose"
+        @apply="filterApply"
         @clear="filterClear"
       />
     </q-modal>
@@ -77,13 +87,19 @@
    */
   const AppCrudGrid = {
     mixins: [
-      MixinComputed, MixinData, MixinMethods, MixinProps, MixinNavigation, MixinFilter, MixinGrid
+      MixinComputed,
+      MixinData,
+      MixinMethods,
+      MixinProps,
+      MixinNavigation,
+      MixinFilter,
+      MixinGrid
     ],
     name: 'app-crud-grid',
     components: {
-      AppDataTable, 
-      AppButtonBar, 
-      AppGridToolbar, 
+      AppDataTable,
+      AppButtonBar,
+      AppGridToolbar,
       AppGridFilter,
       AppDebugger
     }
@@ -97,8 +113,7 @@
     &.--grid-filtering
       .--button-filter
         background darkred !important
-        i
-          color white !important
+        i color white !important
     hr
       margin 10px 0
 </style>

@@ -1,17 +1,42 @@
 <template>
-  <field :class="classNames" v-bind="{id, inline, problems, label, validate, title, tooltip, editable, visible}">
+  <field 
+    :class="classNames" 
+    v-bind="{id, inline, problems, label, validate, title, tooltip, editable, visible}"
+  >
     <div slot="component">
-      <div v-show="editable" class="color-wrapper grid" :class="{'has-error': problems.length}">
-        <div class="color" :style="{'background': hex}"></div>
-        <q-btn color="primary" class="color-button">
-          <q-icon name="search"></q-icon>
-          <q-popover ref="popover">
-            <sketch :value="hex" @input="updateValue"></sketch>
+      <div 
+        v-show="editable" 
+        class="color-wrapper grid" 
+        :class="{'has-error': problems.length}"
+      >
+        <div 
+          class="color" 
+          :style="{'background': hex}"
+        >
+        </div>
+        <q-btn 
+          color="primary" 
+          icon="search"
+          class="color-button"
+        >
+           <q-popover ref="popover">
+            <sketch 
+              :value="hex" 
+              @input="updateValue"
+            >
+            </sketch>
           </q-popover>
         </q-btn>
       </div>
-      <div v-show="!editable" class="html grid">
-        <div class="color" :style="{'background': value}"></div>
+      <div 
+        v-show="!editable" 
+        class="html grid"
+      >
+        <div 
+          class="color" 
+          :style="{'background': value}"
+        >
+        </div>
       </div>
     </div>
   </field>

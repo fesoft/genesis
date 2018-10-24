@@ -150,16 +150,8 @@ export default {
     /**
      */
     renderElements () {
+      console.log(this.schemas)
       this.fields = this.schemas.filter(this.filterColumns).map(this.mapColumns).sort(this.sortColumns)
-
-      if (this.buttons.middle.length) {
-        let method = 'unshift'
-        if (this.position === 'right') {
-          method = 'push'
-        }
-        this.fields[method]({field: 'options', label: 'Opções', width: '70px'})
-      }
-
       this.columns = this.fields.filter(field => !field.hidden)
     },
     /**

@@ -1,25 +1,36 @@
 <template>
   <div class="app-data-table" :style="config.styles">
-     <q-table 
+     <q-table
         row-key="id"
-        v-bind="{data, columns, config}" 
-        @refresh="refresh" 
+        :selection="selection"
+        :selected.sync="selected"
+        v-bind="{data, columns, config}"
+        @refresh="refresh"
         @rowclick="rowclick"
       >
-
-      <div v-if="actions.length" slot="col-options" slot-scope="cell">
-        <div class="app-data-table-options">
-          <q-fab color="primary" icon="settings" :direction="direction">
-            <q-fab-action v-if="permissionCheck(action, cell.row)" v-for="action in actions" :key="action.id"
-                          @click="handler(action, cell.row)" :color="action.color" :icon="action.icon" class="rotate">
-              <app-tooltip :disabled="!action.tooltip">{{ action.tooltip }}</app-tooltip>
-            </q-fab-action>
-          </q-fab>
-        </div>
-      </div>
-      
-      <template v-for="slot in slots" :slot="'col-' + slot.field" slot-scope="cell">
-        <field-functional :component="slot.component" :on="on(slot, cell)" :props="props(slot, cell)"/>
+      <template
+        slot="top-selection"
+        slot-scope="props"
+      >
+        <q-btn
+          round
+          v-for="action in actions"
+          :key="action.id"
+          @click="handler(action, selected[0])"
+          :color="action.color"
+          :icon="action.icon"
+        />
+      </template>
+      <template
+        v-for="slot in slots"
+        :slot="'col-' + slot.field"
+        slot-scope="cell"
+      >
+        <field-functional
+          :component="slot.component"
+          :on="on(slot, cell)"
+          :props="props(slot, cell)"
+        />
       </template>
     </q-table>
     </div>

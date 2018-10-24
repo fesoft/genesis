@@ -21,7 +21,7 @@
     name: 'app-card',
     props: {
       label: {
-        default: 'teste'
+        default: ''
       },
       icon: {
         default: 'home'
